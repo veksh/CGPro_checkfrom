@@ -470,7 +470,7 @@ headers "From" address.
 name used in SMTP AUTH.
 
 =item *
-original "From" address (for bounced messages)
+original "From" address (for bounced messages).
 
 =back
 
@@ -483,9 +483,9 @@ Using alias as login name is OK too, CommuniGate will put main account name in A
 
 For bounced messages (i.e. re-sent to a new recipients not as an attachment/quote/forward, but as 
 a clone of an original message with some fields and in some cases even body of message altered), 
-"From" address is usually wrong (does not match re-sender auth name), and message action is 
-determined by "allowBounce" global param. By default it is turned off (because bounced messages 
-are highly misleading and usually produced by clueless users), but one could allow to bounce 
+"From" address is usually wrong (does not match re-sender auth name). In this case message action 
+is determined by "allowBounce" global param. By default it is turned off because bounced messages 
+are highly misleading and usually produced by clueless users, but one could allow to bounce 
 messages this way if users are educated enough and client cleanly shows message as forwarded
 (e.g. Apple Mail displays "Resent-From:" header above usual ones and is OK).
 
@@ -497,10 +497,10 @@ For non-bounced messages 2 simple transformations are tried (depending on "trimD
 
 =over 4
 
-=item trimDomain
+=item * I<trimDomain>
 trim leftmost part of domain: "vasia@mt.company.com" would pass for "vasia@company.com".
 
-=item moveDomain
+=item * I<moveDomain>
 move leftmost part of domain to name: "vasia@mt.company.com" could use "vasia-mt@company.com".
 
 =back 
@@ -528,7 +528,7 @@ forged and "ERROR" is returned to CommuniGate to reject message.
 If required fields could not be found in message is either passed or rejected depending on I<failOpen> 
 configuration parameter.
 
-=head3 Logging
+=head2 Logging
 
 Operational errors and rejected messages are logged to CommuniGate log as usual.
 Additional operational details are logged if I<verbose> parameter is specified in configuration.
@@ -543,23 +543,23 @@ Parameters in config file are as follows:
 
 =over 4
 
-=item serverAddress
+=item * I<serverAddress>:
 address of CommuniGate server to check users againtst, default "localhost"
 
-=item serverPort
+=item * I<serverPort>:
 port for PWD access, default 106
 
-=item userName
+=item * I<userName>:
 slightly-privileged user, default "postmaster"
 
-=item userPass
+=item * I<userPass>:
 passsword for userName, no default
 
-=item debugLevel
+=item * I<debugLevel>:
 level of debug output from filter: one of C<DEBUG>, C<INFO>, C<NOTE>, C<WARN>, C<CRIT>,
-default C<WARN>
+default I<WARN>
 
-=item failOpen
+=item * I<failOpen>:
 on some configuration or processing faulure, pass messages (1) or return error (0), 
 default is to pass 
 
@@ -572,10 +572,10 @@ To use it call filter from some domain-wide (or for some subset of users) rule l
 
 =over 4 
 
-=item condition 
+=item B<condition>:
 C<'Source' 'in' 'authenticated'> 
 
-=item action
+=item B<action>:
 C<'ExternalFilter' 'check_from'>
 
 =back
