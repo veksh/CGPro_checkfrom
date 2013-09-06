@@ -1,5 +1,7 @@
 #!/usr/bin/perl -w
 
+# run `perldoc check_from.pl` for documentation (or see POD at the end of file)
+
 use strict;
 use FileHandle;
 use CLI;
@@ -434,10 +436,6 @@ while (my $line = <STDIN>) {
 }
 
 __END__
-
-# man perlpod
-# check with podchecker
-# view with perldoc
 
 =pod
 
