@@ -237,12 +237,7 @@ sub processFile {
     chomp($line);
     last if $line eq '';
     reply('DEBUG', "headers: got line $line");
-    if (! $authName && $line =~ /^Sender: <(\S+)\@(\S+)>/) {
-      # Sender: <alice@mt.company.com>
-      ($authName, $authDomain) = ($1, $2);
-      $authSender = "$authName\@$authDomain";
-      reply('DEBUG', "found auth sender <$authSender>");
-    } elsif (! $authName && $line =~ /^Received: from \[(\S+)\] \(account (\S+)\@([^) ]+)/) {
+    if (!$authName && $line =~ /^Received: from \[(\S+)\] \(account (\S+)\@([^) ]+)/) {
       # like "Received: from [10.1.11.6] (account alice@mt.company.com)"
       # or "Received: from [194.85.103.16] (account pot@company.com HELO pot)"
       ($authSenderIP, $authName, $authDomain) = ($1, $2, $3);
@@ -253,7 +248,6 @@ sub processFile {
       if ($line =~ /From: (?!<)(\S+\@\S+)$/) {
         # From: root@drone.m1.company.com
         $headersSender = $1;
-        reply('DEBUG', "headers: got line $line");
         reply('DEBUG', "found headers sender <$headersSender>");
       } else {
         # From: "=?utf-8?B?0JDQu9C40YHQsA==?=
